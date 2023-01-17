@@ -76,9 +76,13 @@ public final class App {
         MyRunnableInterface<Integer> minusOperation = (a, b) -> {
             return a - b;
         };
+        MyMessageInterface printString = (a) -> {
+            System.out.println(a);
+        };
         System.out.println("addOperation: " + addOperation.process(1, 1));
         System.out.println("multiplyOperation: " + multiplyOperation.process(2,5));
         System.out.println("minusOperation: " + minusOperation.process(10, 8));
+        printString.printMessage("Let's take a break at 12pm");
 
     }
 }   
