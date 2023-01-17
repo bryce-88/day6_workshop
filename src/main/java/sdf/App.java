@@ -16,25 +16,25 @@ public final class App {
      */
     public static void main(String[] args) {
 
-        Thread thread1 = new Thread(new Runnable() {
+        // Thread thread1 = new Thread(new Runnable() {
 
-            @Override
-            public void run() {
-                for (int i = 0; i < 5; i++) {
-                    System.out.println(Thread.currentThread().getName() +
-                    "\tRunnable ..." + i);
-                }
+        //     @Override
+        //     public void run() {
+        //         for (int i = 0; i < 5; i++) {
+        //             System.out.println(Thread.currentThread().getName() +
+        //             "\tRunnable ..." + i);
+        //         }
                 
-            }
+        //     }
 
-        });
-        thread1.start();
+        // });
+        // thread1.start();
 
         MyRunnableImplementation mRI = new MyRunnableImplementation("Task 1");
         MyRunnableImplementation mRI2 = new MyRunnableImplementation("Task 2");
-        // MyRunnableImplementation mRI3 = new MyRunnableImplementation("Task 3");
-        // MyRunnableImplementation mRI4 = new MyRunnableImplementation("Task 4");
-        // MyRunnableImplementation mRI5 = new MyRunnableImplementation("Task 5");
+        MyRunnableImplementation mRI3 = new MyRunnableImplementation("Task 3");
+        MyRunnableImplementation mRI4 = new MyRunnableImplementation("Task 4");
+        MyRunnableImplementation mRI5 = new MyRunnableImplementation("Task 5");
 
 
         // Thread thread2 = new Thread(mRI);
@@ -60,6 +60,25 @@ public final class App {
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.execute(mRI);
         executorService.execute(mRI2);
+        executorService.execute(mRI3);
+        executorService.execute(mRI4);
+        executorService.execute(mRI5);
+        executorService.shutdown();
+
+
+        //Lambda expression/operation
+        MyRunnableInterface<Integer> addOperation = (a, b) -> {
+            return a + b;
+        };
+        MyRunnableInterface<Integer> multiplyOperation = (a, b) -> {
+            return a * b;
+        };
+        MyRunnableInterface<Integer> minusOperation = (a, b) -> {
+            return a - b;
+        };
+        System.out.println("addOperation: " + addOperation.process(1, 1));
+        System.out.println("multiplyOperation: " + multiplyOperation.process(2,5));
+        System.out.println("minusOperation: " + minusOperation.process(10, 8));
 
     }
 }   
