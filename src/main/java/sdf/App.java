@@ -1,7 +1,11 @@
 package sdf;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 /**
  * Hello world!
@@ -84,5 +88,43 @@ public final class App {
         System.out.println("minusOperation: " + minusOperation.process(10, 8));
         printString.printMessage("Let's take a break at 12pm");
 
+        //list of employees
+        List<Employee> employees = new ArrayList<Employee>();
+        employees.add(new Employee(1, "Adam", "Cheng", 50000));
+        employees.add(new Employee(2, "Bertram", "Chong", 70000));
+        employees.add(new Employee(3, "Kelvin", "Khoo", 80000));
+        employees.add(new Employee(4, "Bernard", "Tan", 30000));
+        employees.add(new Employee(5, "Donnie", "Yen", 50000));
+        employees.add(new Employee(6, "Tony", "Lam", 65000));
+
+        // employees.forEach(emp -> {
+        //     System.out.println(emp);
+        // });
+
+        // for (Employee emp : employees) {
+        //     System.out.println(emp);
+        // }
+
+
+        //using .filter to filter out last name with "Ch"
+        List<Employee> filteredEmployees = employees.stream().filter(emp -> emp.getLastName().contains("Ch")).collect(Collectors.toList());
+        // filteredEmployees.forEach(emp -> System.out.println(emp));
+
+        // employees.sort(Comparator.comparing(e -> e.getFirstName()));
+        // employees.sort(Comparator.comparing(Employee::getFirstName).reversed());
+        Comparator<Employee> compare = Comparator.comparing(e -> e.getFirstName());
+        employees.sort(compare.reversed());
+
+        // employees.forEach(emp -> {
+        //     System.out.println(emp);
+        // });
+
+        Comparator<Employee> groupByComparator = Comparator.comparing
+        (Employee::getFirstName)
+                .thenComparing(Employee::getLastName);
+                employees.sort(groupByComparator);
+                employees.forEach(emp -> {
+                    System.out.println(emp);
+                });
     }
 }   
